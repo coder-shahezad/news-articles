@@ -577,6 +577,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/dates@npm:^7.16.0":
+  version: 7.16.0
+  resolution: "@mantine/dates@npm:7.16.0"
+  dependencies:
+    clsx: "npm:^2.1.1"
+  peerDependencies:
+    "@mantine/core": 7.16.0
+    "@mantine/hooks": 7.16.0
+    dayjs: ">=1.0.0"
+    react: ^18.x || ^19.x
+    react-dom: ^18.x || ^19.x
+  checksum: 10c0/5537de588a0301c9532fa45a8c9eba8ceb4ad9d37c6e25873f08a13061632c5ae471672ef82b7138eb5fca77e9a4117b4999c2ef0b248b080a65a7e4e8a2738a
+  languageName: node
+  linkType: hard
+
 "@mantine/hooks@npm:7.16.0":
   version: 7.16.0
   resolution: "@mantine/hooks@npm:7.16.0"
@@ -1072,6 +1087,13 @@ __metadata:
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: 10c0/32c038af259897c807ac738d9eab16b3d86747c72b09d5c740978e06f067f9b7b1737e1b75e407c7ab1fe1543dc95f20e202b4786aeb1b8d3bdf5d5ce655e6c6
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.13":
+  version: 1.11.13
+  resolution: "dayjs@npm:1.11.13"
+  checksum: 10c0/a3caf6ac8363c7dade9d1ee797848ddcf25c1ace68d9fe8678ecf8ba0675825430de5d793672ec87b24a69bf04a1544b176547b2539982275d5542a7955f35b7
   languageName: node
   linkType: hard
 
@@ -1729,10 +1751,12 @@ __metadata:
   resolution: "news-acticles@workspace:."
   dependencies:
     "@mantine/core": "npm:7.16.0"
+    "@mantine/dates": "npm:^7.16.0"
     "@mantine/hooks": "npm:7.16.0"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
     "@vitejs/plugin-react": "npm:^4.3.4"
+    dayjs: "npm:^1.11.13"
     postcss: "npm:^8.4.49"
     postcss-preset-mantine: "npm:1.17.0"
     postcss-simple-vars: "npm:^7.0.1"
