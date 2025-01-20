@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react';
-import { CloseButton, Grid, Group, Input, Text } from '@mantine/core';
+import {
+  CloseButton,
+  Grid,
+  Group,
+  Input,
+  Text,
+  UnstyledButton,
+} from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { useNewsContext } from '../context/useNewsContext';
 import { categories } from '../content';
 
@@ -23,6 +31,8 @@ const NewsFeedSearch = () => {
   useEffect(() => {
     if (debouncedQuery.length >= 3) {
       setQuery(debouncedQuery);
+    } else if (debouncedQuery.length === 0) {
+      setQuery('technology');
     }
   }, [debouncedQuery, setQuery]);
 
@@ -36,11 +46,21 @@ const NewsFeedSearch = () => {
           rightSectionPointerEvents="all"
           mt="md"
           rightSection={
-            <CloseButton
-              aria-label="Clear search"
-              onClick={() => setSearchInput('')}
-              style={{ display: searchInput ? undefined : 'none' }}
-            />
+            searchInput?.length ? (
+              <CloseButton
+                aria-label="Clear search"
+                onClick={() => {
+                  setSearchInput('');
+                  setDebouncedQuery('');
+                  setQuery('technology');
+                }}
+                style={{ display: searchInput ? undefined : 'none' }}
+              />
+            ) : (
+              <UnstyledButton mt={'6px'}>
+                <IconSearch />
+              </UnstyledButton>
+            )
           }
         />
       </Grid.Col>
