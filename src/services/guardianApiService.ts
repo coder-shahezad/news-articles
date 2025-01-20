@@ -1,5 +1,6 @@
 import { fetchData } from './apiClient';
 import { NewsApiService } from '../interfaces';
+import { formatDateToCompactString } from '../utils';
 
 const GUARDIAN_API_KEY = '150c1a27-9318-4d85-9b92-97d163a7f00d';
 const BASE_URL = 'https://content.guardianapis.com';
@@ -12,8 +13,16 @@ export async function getGuardianArticles(props: NewsApiService) {
   if (query) url.searchParams.append('q', query);
   if (category) url.searchParams.append('section', category.toLowerCase());
   url.searchParams.append('show-fields', 'bodyText,thumbnail');
-  if (date) url.searchParams.append('from-date', date.toISOString());
-  if (date) url.searchParams.append('to-date', date.toISOString());
+  if (date)
+    url.searchParams.append(
+      'from-date',
+      formatDateToCompactString(date.toString())
+    );
+  if (date)
+    url.searchParams.append(
+      'to-date',
+      formatDateToCompactString(date.toString())
+    );
   url.searchParams.append('api-key', GUARDIAN_API_KEY!);
 
   // Cancel previous request if it exists

@@ -1,4 +1,5 @@
 import { NewsApiService } from '../interfaces';
+import { formatDateToCompactString } from '../utils';
 import { fetchData } from './apiClient';
 
 const NYT_API_KEY = 'ZqbvWG3cERdoz1n1PxVj4ORujroVtquh';
@@ -12,8 +13,16 @@ export async function getNYTArticles(props: NewsApiService) {
   if (query) url.searchParams.append('q', query);
   if (category)
     url.searchParams.append('fq', `section_name:("${category.toLowerCase()}")`);
-  if (date) url.searchParams.append('begin_date', date.toISOString());
-  if (date) url.searchParams.append('end_date', date.toISOString());
+  if (date)
+    url.searchParams.append(
+      'begin_date',
+      formatDateToCompactString(date.toString())
+    );
+  if (date)
+    url.searchParams.append(
+      'end_date',
+      formatDateToCompactString(date.toString())
+    );
   url.searchParams.append('api-key', NYT_API_KEY!);
 
   // Cancel the previous request if it exists

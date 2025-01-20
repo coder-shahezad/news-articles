@@ -1,5 +1,6 @@
 import { fetchData } from './apiClient';
 import { NewsApiService } from '../interfaces';
+import { formatDateToCompactString } from '../utils';
 
 const NEWS_API_KEY = 'b00cf8d14328415eba07fa9127ad516b';
 const BASE_URL = 'https://newsapi.org/v2';
@@ -20,10 +21,22 @@ export async function getNewsArticles(props: NewsApiService) {
     topHeadlinesUrl.searchParams.append('category', category.toLowerCase());
   }
   if (date) {
-    topHeadlinesUrl.searchParams.append('from', date.toISOString());
-    topHeadlinesUrl.searchParams.append('to', date.toISOString());
-    everythingUrl.searchParams.append('from', date.toISOString());
-    everythingUrl.searchParams.append('to', date.toISOString());
+    topHeadlinesUrl.searchParams.append(
+      'from',
+      formatDateToCompactString(date.toString())
+    );
+    topHeadlinesUrl.searchParams.append(
+      'to',
+      formatDateToCompactString(date.toString())
+    );
+    everythingUrl.searchParams.append(
+      'from',
+      formatDateToCompactString(date.toString())
+    );
+    everythingUrl.searchParams.append(
+      'to',
+      formatDateToCompactString(date.toString())
+    );
   }
   topHeadlinesUrl.searchParams.append('apiKey', NEWS_API_KEY!);
   everythingUrl.searchParams.append('apiKey', NEWS_API_KEY!);

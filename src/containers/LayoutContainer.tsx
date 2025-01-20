@@ -14,7 +14,7 @@ import { useNewsContext } from '../context/useNewsContext';
 
 const LayoutContainer = () => {
   const [mobileOpened, { toggle: toggleMobile }] = useDisclosure(false);
-  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(true);
+  const [desktopOpened, { toggle: toggleDesktop }] = useDisclosure(false);
   const [opened, { toggle }] = useDisclosure();
   const { date, setDate } = useNewsContext();
 
@@ -39,7 +39,7 @@ const LayoutContainer = () => {
     >
       <AppShell.Header py="xs" component={Center}>
         <Burger
-          opened={!opened}
+          opened={opened}
           onClick={handleNavbarToggle}
           aria-label="Toggle navigation"
           pos={'absolute'}

@@ -1,5 +1,5 @@
 import { Card, Group, Image, Text } from '@mantine/core';
-import { parseDateFormat } from '../utils';
+import { convertToDateString } from '../utils';
 import { NewsArticle } from '../interfaces';
 
 const NewsFeedItem = ({
@@ -25,7 +25,9 @@ const NewsFeedItem = ({
         <Image src={thumbnail} height={200} alt={title} />
       </Card.Section>
       <Group justify="space-between" mt="xs">
-        <Text fw={500}>{parseDateFormat(publishedAt)}</Text>
+        <Text size="sm" c="dimmed">
+          {convertToDateString(publishedAt)}
+        </Text>
         <Text
           size="xs"
           mt="md"
