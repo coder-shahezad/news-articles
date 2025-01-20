@@ -2,15 +2,14 @@ import { fetchData } from './apiClient';
 import { NewsApiService } from '../interfaces';
 import { formatDateToCompactString } from '../utils';
 
-const NEWS_API_KEY = 'b00cf8d14328415eba07fa9127ad516b';
-const BASE_URL = 'https://newsapi.org/v2';
+const { VITE_NEWS_API_KEY, VITE_NEWS_API_BASE_URL } = import.meta.env;
 
 let abortController: AbortController | null = null;
 
 export async function getNewsArticles(props: NewsApiService) {
   const { query, category, date } = props;
-  const everythingUrl = new URL(`${BASE_URL}/everything`);
-  const topHeadlinesUrl = new URL(`${BASE_URL}/top-headlines`);
+  const everythingUrl = new URL(`${VITE_NEWS_API_BASE_URL}/everything`);
+  const topHeadlinesUrl = new URL(`${VITE_NEWS_API_BASE_URL}/top-headlines`);
 
   if (query) {
     everythingUrl.searchParams.append('q', query);
@@ -38,8 +37,8 @@ export async function getNewsArticles(props: NewsApiService) {
       formatDateToCompactString(date.toString())
     );
   }
-  topHeadlinesUrl.searchParams.append('apiKey', NEWS_API_KEY!);
-  everythingUrl.searchParams.append('apiKey', NEWS_API_KEY!);
+  topHeadlinesUrl.searchParams.append('apiKey', VITE_NEWS_API_KEY!);
+  everythingUrl.searchParams.append('apiKey', VITE_NEWS_API_KEY!);
 
   // Cancel the previous request if it exists
   if (abortController) {

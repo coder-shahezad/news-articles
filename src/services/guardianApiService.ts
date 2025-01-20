@@ -2,14 +2,13 @@ import { fetchData } from './apiClient';
 import { NewsApiService } from '../interfaces';
 import { formatDateToCompactString } from '../utils';
 
-const GUARDIAN_API_KEY = '150c1a27-9318-4d85-9b92-97d163a7f00d';
-const BASE_URL = 'https://content.guardianapis.com';
+const { VITE_GUARDIAN_API_KEY, VITE_GUARDIAN_BASE_URL } = import.meta.env;
 
 let abortController: AbortController | null = null;
 
 export async function getGuardianArticles(props: NewsApiService) {
   const { query = '', category, date } = props;
-  const url = new URL(`${BASE_URL}/search`);
+  const url = new URL(`${VITE_GUARDIAN_BASE_URL}/search`);
   if (query) url.searchParams.append('q', query);
   if (category) url.searchParams.append('section', category.toLowerCase());
   url.searchParams.append('show-fields', 'bodyText,thumbnail');
@@ -23,7 +22,7 @@ export async function getGuardianArticles(props: NewsApiService) {
       'to-date',
       formatDateToCompactString(date.toString())
     );
-  url.searchParams.append('api-key', GUARDIAN_API_KEY!);
+  url.searchParams.append('api-key', VITE_GUARDIAN_API_KEY!);
 
   // Cancel previous request if it exists
   if (abortController) {
