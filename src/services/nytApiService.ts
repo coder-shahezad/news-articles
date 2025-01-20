@@ -2,14 +2,13 @@ import { NewsApiService } from '../interfaces';
 import { formatDateToCompactString } from '../utils';
 import { fetchData } from './apiClient';
 
-const NYT_API_KEY = 'ZqbvWG3cERdoz1n1PxVj4ORujroVtquh';
-const BASE_URL = 'https://api.nytimes.com/svc/search/v2';
+const { VITE_NYT_API_KEY, VITE_NYT_BASE_URL } = import.meta.env;
 
 let abortController: AbortController | null = null;
 
 export async function getNYTArticles(props: NewsApiService) {
   const { query = '', category, date } = props;
-  const url = new URL(`${BASE_URL}/articlesearch.json`);
+  const url = new URL(`${VITE_NYT_BASE_URL}/articlesearch.json`);
   if (query) url.searchParams.append('q', query);
   if (category)
     url.searchParams.append('fq', `section_name:("${category.toLowerCase()}")`);
@@ -23,7 +22,7 @@ export async function getNYTArticles(props: NewsApiService) {
       'end_date',
       formatDateToCompactString(date.toString())
     );
-  url.searchParams.append('api-key', NYT_API_KEY!);
+  url.searchParams.append('api-key', VITE_NYT_API_KEY!);
 
   // Cancel the previous request if it exists
   if (abortController) {
